@@ -15,8 +15,14 @@ public class LoginMain extends Application {
         // Create the Login custom control
         GridPane root = new LoginControl();
         Scene scene = new Scene(root);
+        setupStyle(scene);
         stage.setScene(scene);
         stage.setTitle("FXMl Custom Control");
         stage.show();
     }
+
+    private void setupStyle(Scene scene){
+        scene.getStylesheets().add("/Login.css");
+    }
+
 }

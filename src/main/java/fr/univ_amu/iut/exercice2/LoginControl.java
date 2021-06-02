@@ -3,6 +3,7 @@ package fr.univ_amu.iut.exercice2;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -31,7 +32,6 @@ public class LoginControl extends GridPane {
 
     @FXML
     private void initialize() {
-
     }
 
     @FXML
