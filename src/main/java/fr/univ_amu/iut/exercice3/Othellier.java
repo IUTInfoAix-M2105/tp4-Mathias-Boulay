@@ -33,6 +33,10 @@ public class Othellier extends GridPane {
     private ObjectProperty<Joueur> joueurCourant = new SimpleObjectProperty<>(Joueur.NOIR);
     private AuditeurCase auditeurCase = new AuditeurCase();
 
+    public Othellier(){
+        this(8);
+    }
+
     public Othellier(int taille) {
         this.taille = taille;
         cases = new Case[taille][taille];
