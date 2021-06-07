@@ -44,6 +44,8 @@ public class StatusBar extends BorderPane implements Initializable {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+
+        createBinding();
     }
 
     @FXML
