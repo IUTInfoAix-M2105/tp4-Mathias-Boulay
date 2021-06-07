@@ -32,6 +32,11 @@ class Case extends Button {
 
     public void setPossesseur(Joueur possesseur) {
         this.possesseur = possesseur;
+        if (possesseur.equals(Joueur.BLANC)){
+            setImage(new Image("/assets/blanc.png"));
+        }else {
+            setImage(new Image("/assets/noir.png"));
+        }
     }
 
     public void setImage(Image image){
