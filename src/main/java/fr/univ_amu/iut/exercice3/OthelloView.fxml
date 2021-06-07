@@ -8,10 +8,10 @@
 <?import javafx.scene.control.MenuItem?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             xmlns="http://javafx.com/javafx"
-            fx:controller="fr.univ_amu.iut.exercice3.OthelloController">
+            fx:controller="fr.univ_amu.iut.exercice3.OthelloController" >
     <top>
         <MenuBar>
-            <Menu>
+            <Menu text="Menu">
                 <MenuItem text="NOUVELLE PARTIE" onAction="#actionMenuJeuNouveau"/>
                 <MenuItem text="QUITTER CE PROGRAMME DE MISERE !" onAction="#actionMenuJeuQuitter"/>
             </Menu>

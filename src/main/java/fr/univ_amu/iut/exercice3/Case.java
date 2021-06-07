@@ -8,22 +8,25 @@ import javafx.scene.image.ImageView;
 class Case extends Button {
     private int ligne;
     private int colonne;
-    private Joueur possesseur;
+    private Joueur possesseur = Joueur.PERSONNE;
     private ImageView imageView;
 
     public Case(int ligne, int colonne) {
-        setupImageView();
+
         this.ligne = ligne;
         this.colonne = colonne;
         setPrefSize(50,50);
+        setWidth(50);
+        setHeight(50);
+        setupImageView();
     }
 
     private void setupImageView(){
-        imageView = new ImageView();
+        imageView = new ImageView(possesseur.getImage());
         imageView.setFitWidth(50);
+        imageView.setFitHeight(50);
         imageView.setPreserveRatio(true);
-        imageView.setSmooth(true);
-        imageView.setCache(true);
+        setGraphic(imageView);
     }
 
     public Joueur getPossesseur() {
@@ -32,11 +35,7 @@ class Case extends Button {
 
     public void setPossesseur(Joueur possesseur) {
         this.possesseur = possesseur;
-        if (possesseur.equals(Joueur.BLANC)){
-            setImage(new Image("/assets/blanc.png"));
-        }else {
-            setImage(new Image("/assets/noir.png"));
-        }
+        setImage(possesseur.getImage());
     }
 
     public void setImage(Image image){

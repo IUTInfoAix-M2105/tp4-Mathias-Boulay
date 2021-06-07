@@ -63,6 +63,7 @@ public class Othellier extends GridPane {
         for(int i=0; i<taille; ++i){
             for(int j=0; j<taille; ++j){
                 cases[i][j] = new Case(i, j);
+                this.add(cases[i][j], i, j);
             }
         }
     }

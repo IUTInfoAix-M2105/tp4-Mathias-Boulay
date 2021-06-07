@@ -35,7 +35,7 @@ public class OthelloController {
     }
 
     private void afficheDialogFinDePartie() {
-        Alert alertDialog = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
+        Alert alertDialog = new Alert(Alert.AlertType.CONFIRMATION, "Fin de partie !", ButtonType.OK);
         alertDialog.showAndWait();
     }
 
