@@ -27,24 +27,32 @@ public class Othellier extends GridPane {
             new Point2D(0, -1),
             new Point2D(1, -1)
     };
-    private final EventHandler<ActionEvent> caseListener = event -> {
-        throw new RuntimeException("Not yet implemented !");
-    };
+
     private int taille;
     private Case[][] cases;
     private ObjectProperty<Joueur> joueurCourant = new SimpleObjectProperty<>(Joueur.NOIR);
+    private AuditeurCase auditeurCase = new AuditeurCase();
 
     public Othellier(int taille) {
         this.taille = taille;
         cases = new Case[taille][taille];
         remplirOthelier(taille);
         adapterLesLignesEtColonnes();
+        setupCaseOnAction();
 
         nouvellePartie();
     }
 
+    private void setupCaseOnAction(){
+        for(int i=0; i < cases.length; ++i){
+            for(int j=0;j < cases.length; ++j){
+                cases[i][j].setOnAction(auditeurCase);
+            }
+        }
+    }
+
     public ObjectProperty<Joueur> joueurCourantProperty() {
-        throw new RuntimeException("Not yet implemented !");
+        return joueurCourant;
     }
 
     private void remplirOthelier(int taille) {
@@ -139,11 +147,11 @@ public class Othellier extends GridPane {
     }
 
     private boolean estIndicesValides(int indiceLigne, int indiceColonne) {
-        throw new RuntimeException("Not yet implemented !");
+        return estIndiceValide(indiceColonne) && estIndiceValide(indiceLigne);
     }
 
     private boolean estIndiceValide(int indiceColonne) {
-        throw new RuntimeException("Not yet implemented !");
+        return (indiceColonne < taille) && (indiceColonne >= 0);
     }
 
     private boolean estPositionJouable(Case caseSelectionnee) {
@@ -157,7 +165,11 @@ public class Othellier extends GridPane {
         joueurCourant.get().suivant().decrementerScore();
 
         for(Case cell : casesCapturable(caseCapturee)){
-            capturer(cell);
+            cell.setPossesseur(joueurCourant.get());
+
+            caseCapturee.setPossesseur(joueurCourant.get());
+            joueurCourant.get().incrementerScore();
+            joueurCourant.get().suivant().decrementerScore();
         }
     }
 
@@ -178,6 +190,19 @@ public class Othellier extends GridPane {
         for(int i=0; i < cases.length; ++i){
             for(int j=0; j < cases[i].length; ++j){
                 cases[i][j].setPossesseur(Joueur.PERSONNE);
+            }
+        }
+    }
+
+
+    private class AuditeurCase implements EventHandler<ActionEvent> {
+
+        @Override
+        public void handle(ActionEvent actionEvent) {
+            Case source = (Case) actionEvent.getSource();
+            if(estPositionJouable(source)){
+                capturer(source);
+                tourSuivant();
             }
         }
     }
