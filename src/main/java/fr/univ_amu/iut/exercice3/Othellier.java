@@ -44,9 +44,9 @@ public class Othellier extends GridPane {
     }
 
     private void setupCaseOnAction(){
-        for(int i=0; i < cases.length; ++i){
-            for(int j=0;j < cases.length; ++j){
-                cases[i][j].setOnAction(auditeurCase);
+        for (Case[] cases : cases) {
+            for (Case cell : cases) {
+                cell.setOnAction(auditeurCase);
             }
         }
     }
@@ -187,9 +187,9 @@ public class Othellier extends GridPane {
     }
 
     private void vider() {
-        for(int i=0; i < cases.length; ++i){
-            for(int j=0; j < cases[i].length; ++j){
-                cases[i][j].setPossesseur(Joueur.PERSONNE);
+        for (Case[] rowCase : cases) {
+            for (Case cell : rowCase) {
+                cell.setPossesseur(Joueur.PERSONNE);
             }
         }
     }
