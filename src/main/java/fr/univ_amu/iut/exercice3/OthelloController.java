@@ -1,7 +1,12 @@
 package fr.univ_amu.iut.exercice3;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+
+import java.util.Optional;
 
 
 public class OthelloController {
@@ -13,24 +18,44 @@ public class OthelloController {
 
     @FXML
     void initialize() {
-        throw new RuntimeException("Not yet implemented !");
+        othellier.joueurCourantProperty().addListener((observableValue, joueur, t1) -> {
+            if(t1.equals(Joueur.PERSONNE)){
+                afficheDialogFinDePartie();
+            }
+        });
+
+        statusBar.joueurCourantProperty().bind(othellier.joueurCourantProperty());
     }
 
     void setStageAndSetupListeners(Stage stage) {
-        throw new RuntimeException("Not yet implemented !");
+        stage.setOnCloseRequest(windowEvent -> {
+            actionMenuJeuQuitter();
+            windowEvent.consume();
+        });
     }
 
     private void afficheDialogFinDePartie() {
-        throw new RuntimeException("Not yet implemented !");
+        Alert alertDialog = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
+        alertDialog.showAndWait();
     }
 
     @FXML
     public void actionMenuJeuQuitter() {
-        throw new RuntimeException("Not yet implemented !");
+        Alert alertDialog = new Alert(Alert.AlertType.CONFIRMATION, "Voulez vous vraiment quitter ?", ButtonType.OK);
+        Optional<ButtonType> buttonPressed = alertDialog.showAndWait();
+
+        if (buttonPressed.isPresent() && buttonPressed.get() == ButtonType.OK){
+            Platform.exit();
+        }
     }
 
     @FXML
     public void actionMenuJeuNouveau() {
-        throw new RuntimeException("Not yet implemented !");
+        Alert alertDialog = new Alert(Alert.AlertType.CONFIRMATION, "Voulez vous vraiment commencer une nouvelle partie ?", ButtonType.OK);
+        Optional<ButtonType> buttonPressed = alertDialog.showAndWait();
+
+        if (buttonPressed.isPresent() && buttonPressed.get() == ButtonType.OK){
+            othellier.nouvellePartie();
+        }
     }
 }
