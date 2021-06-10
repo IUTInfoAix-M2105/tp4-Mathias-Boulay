@@ -165,16 +165,22 @@ public class Othellier extends GridPane {
     }
 
     private void capturer(Case caseCapturee) {
+        Joueur joueurSuivant = joueurCourant.get().suivant();
+
         caseCapturee.setPossesseur(joueurCourant.get());
         joueurCourant.get().incrementerScore();
-        joueurCourant.get().suivant().decrementerScore();
+        if(caseCapturee.getPossesseur().equals(joueurSuivant)){
+            joueurSuivant.decrementerScore();
+        }
 
         for(Case cell : casesCapturable(caseCapturee)){
             cell.setPossesseur(joueurCourant.get());
 
             caseCapturee.setPossesseur(joueurCourant.get());
             joueurCourant.get().incrementerScore();
-            joueurCourant.get().suivant().decrementerScore();
+            if(caseCapturee.getPossesseur().equals(joueurSuivant)){
+                joueurSuivant.decrementerScore();
+            }
         }
     }
 
